@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { PhCaretDown } from '@phosphor-icons/vue';
 import { ref, useId } from 'vue';
 
 const isOpen = ref(false);
