@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, getCurrentInstance, ref } from 'vue'
 
 export type UIButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost'
 export type UIButtonSize = 'sm' | 'md' | 'lg'
@@ -10,6 +10,7 @@ const props = withDefaults(
     size?: UIButtonSize
     type?: 'button' | 'submit' | 'reset'
     loading?: boolean
+    autoLoading?: boolean
     disabled?: boolean
     block?: boolean
   }>(),
@@ -18,6 +19,7 @@ const props = withDefaults(
     size: 'md',
     type: 'button',
     loading: false,
+    autoLoading: false,
     disabled: false,
     block: false,
   },
@@ -27,7 +29,10 @@ const emit = defineEmits<{
   click: [event: MouseEvent]
 }>()
 
-const isDisabled = computed(() => props.disabled || props.loading)
+const instance = getCurrentInstance()
+const internalLoading = ref(false)
+const isLoading = computed(() => props.loading || internalLoading.value)
+const isDisabled = computed(() => props.disabled || isLoading.value)
 
 const variantClass = computed(() => {
   switch (props.variant) {
@@ -55,12 +60,41 @@ const sizeClass = computed(() => {
   }
 })
 
-const onClick = (e: MouseEvent) => {
+const collectClickHandlers = () => {
+  const vProps = instance?.vnode.props ?? {}
+  const fns: Array<(e: MouseEvent) => unknown> = []
+  const push = (v: unknown) => {
+    if (Array.isArray(v)) {
+      v.forEach(push)
+    } else if (typeof v === 'function') {
+      fns.push(v as (e: MouseEvent) => unknown)
+    }
+  }
+  push(vProps['onClick'])
+  push(vProps['onClickOnce'])
+  return fns
+}
+
+const onClick = async (e: MouseEvent) => {
   if (isDisabled.value) {
     e.preventDefault()
     return
   }
-  emit('click', e)
+  // 親制御モード: 従来どおり発火のみ。スピナーは :loading で親が指示する
+  if (!props.autoLoading) {
+    emit('click', e)
+    return
+  }
+  // 自動モード: 親の @click ハンドラの戻り値(Promise)を待つ間スピナーを表示する。
+  // emit()経由だと戻り値が取得できないため、vnode上のリスナを直接呼び出す（emitとの二重実行を避ける）。
+  const handlers = collectClickHandlers()
+  if (handlers.length === 0) return
+  internalLoading.value = true
+  try {
+    await Promise.all(handlers.map((fn) => fn(e)))
+  } finally {
+    internalLoading.value = false
+  }
 }
 </script>
 
@@ -69,7 +103,7 @@ const onClick = (e: MouseEvent) => {
     :type="props.type"
     :disabled="isDisabled"
     :aria-disabled="isDisabled"
-    :aria-busy="props.loading"
+    :aria-busy="isLoading"
     :class="[
       'inline-flex items-center justify-center gap-2 font-bold transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed',
       variantClass,
@@ -79,7 +113,7 @@ const onClick = (e: MouseEvent) => {
     @click="onClick"
   >
     <svg
-      v-if="props.loading"
+      v-if="isLoading"
       class="animate-spin h-4 w-4"
       viewBox="0 0 24 24"
       fill="none"
