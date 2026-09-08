@@ -2,7 +2,7 @@
   "name": "@aqunex/ui",
   "version": "0.1.0",
   "license": "MIT",
-  
+
   "publishConfig": {
     "access": "public"
   },
@@ -31,10 +31,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "storybook dev -p 6006",
     "build": "vite build",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
@@ -62,5 +60,14 @@
     "vite-plugin-dts": "^5.1.0",
     "vitest": "latest",
     "vue-tsc": "^3.3.11"
-  }
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aqunex-dev/aqn-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aqunex-dev/aqn-ui"
+  },
+  "homepage": "https://aqunex-dev.github.io/aqn-ui"
 }

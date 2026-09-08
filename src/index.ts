@@ -3,6 +3,7 @@ import type { App, Plugin } from 'vue';
 import './style.css';
 
 import UIAccordion from './components/UIAccordion/UIAccordion.vue';
+import UIAlert from './components/UIAlert/UIAlert.vue';
 import UIBadge from './components/UIBadge/UIBadge.vue';
 import UIBase from './components/UIBase/UIBase.vue';
 import UIButton from './components/UIButton/UIButton.vue';
@@ -24,6 +25,7 @@ import UIThemeToggle from './components/UIThemeToggle/UIThemeToggle.vue';
 
 export {
   UIAccordion,
+  UIAlert,
   UIBadge,
   UIBase,
   UIButton,
@@ -43,6 +45,7 @@ export {
 
 const components = {
   UIAccordion,
+  UIAlert,
   UIBadge,
   UIBase,
   UIButton,
