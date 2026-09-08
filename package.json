@@ -2,11 +2,9 @@
   "name": "@aqunex/ui",
   "version": "0.2.0",
   "license": "MIT",
-
   "publishConfig": {
     "access": "public"
   },
-
   "type": "module",
   "packageManager": "pnpm@11.7.0",
   "devEngines": {
@@ -61,7 +59,6 @@
     "vitest": "latest",
     "vue-tsc": "^3.3.11"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aqunex-dev/aqn-ui.git"

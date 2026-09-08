@@ -58,3 +58,24 @@ export const Scrolled: Story = {
     }),
   ],
 }
+
+export const Dashboard: Story = {
+  args: { variant: 'dashboard' },
+  render: (args) => ({
+    components: { UIHeader },
+    setup() {
+      return { args }
+    },
+    template: `
+      <UIHeader v-bind="args" @menu-click="() => {}">
+        <h1 class="truncate text-base font-bold">ダッシュボード</h1>
+        <template #end>
+          <span class="hidden text-sm text-gray-500 sm:block dark:text-gray-400">admin@example.com</span>
+        </template>
+      </UIHeader>
+      <div class="h-[120vh] bg-gray-50 px-8 pt-8 dark:bg-dark">
+        <p class="text-gray-600 dark:text-gray-400">variant="dashboard" のstickyバー。Sidebarの開閉ボタン（menu-click）と連結します。</p>
+      </div>
+    `,
+  }),
+}

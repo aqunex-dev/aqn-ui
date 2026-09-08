@@ -18,6 +18,9 @@ import UIInput from './components/UIInput/UIInput.vue';
 import UILogo from './components/UILogo/UILogo.vue';
 import UISectionTitle from './components/UISectionTitle/UISectionTitle.vue';
 import UISocialButton from './components/UISocialButton/UISocialButton.vue';
+import UISidebar from './components/UISidebar/UISidebar.vue';
+import UISidebarGroup from './components/UISidebar/UISidebarGroup.vue';
+import UISidebarItem from './components/UISidebar/UISidebarItem.vue';
 import UIStat from './components/UIStat/UIStat.vue';
 import UITable from './components/UITable/UITable.vue';
 import UIThemeToggle from './components/UIThemeToggle/UIThemeToggle.vue';
@@ -38,6 +41,9 @@ export {
   UILogo,
   UISectionTitle,
   UISocialButton,
+  UISidebar,
+  UISidebarGroup,
+  UISidebarItem,
   UIStat,
   UITable,
   UIThemeToggle,
@@ -58,6 +64,9 @@ const components = {
   UILogo,
   UISectionTitle,
   UISocialButton,
+  UISidebar,
+  UISidebarGroup,
+  UISidebarItem,
   UIStat,
   UITable,
   UIThemeToggle,
