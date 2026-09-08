@@ -27,6 +27,9 @@
     },
     "./dist/style.css": "./dist/style.css"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
