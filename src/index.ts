@@ -13,6 +13,7 @@ import UIFooter from './components/UIFooter/UIFooter.vue';
 import UIFooterLink from './components/UIFooter/UIFooterLink.vue';
 import UIFooterSocial from './components/UIFooter/UIFooterSocial.vue';
 
+import UIHeader from './components/UIHeader/UIHeader.vue';
 import UIHero from './components/UIHero/UIHero.vue';
 import UIInput from './components/UIInput/UIInput.vue';
 import UILogo from './components/UILogo/UILogo.vue';
@@ -36,6 +37,7 @@ export {
   UIFooter,
   UIFooterLink,
   UIFooterSocial,
+  UIHeader,
   UIHero,
   UIInput,
   UILogo,
@@ -59,6 +61,7 @@ const components = {
   UIFooter,
   UIFooterLink,
   UIFooterSocial,
+  UIHeader,
   UIHero,
   UIInput,
   UILogo,
