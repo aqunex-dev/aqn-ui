@@ -14,20 +14,18 @@ const props = withDefaults(
 <template>
   <div
     v-if="props.variant === 'dashboard'"
-    class="flex h-screen w-full overflow-hidden bg-gray-50 text-gray-900 dark:bg-dark dark:text-white"
+    class="flex h-screen w-full flex-col overflow-hidden bg-gray-50 text-gray-900 dark:bg-dark dark:text-white"
   >
-    <div class="flex min-w-0 flex-1 flex-col overflow-hidden">
+    <header class="shrink-0">
       <slot name="header" />
+    </header>
 
-      <div class="flex flex-1 min-h-0 overflow-hidden">
-        <slot name="sidebar" />
+    <div class="flex flex-1 min-h-0 overflow-hidden">
+      <slot name="sidebar" />
 
-        <main class="min-w-0 flex-1 overflow-y-auto bg-gray-50 text-gray-900 dark:bg-dark dark:text-white">
-          <slot />
-        </main>
-      </div>
-
-      <slot name="footer" />
+      <main class="min-w-0 flex-1 overflow-y-auto bg-gray-50 text-gray-900 dark:bg-dark dark:text-white">
+        <slot />
+      </main>
     </div>
   </div>
 
@@ -35,12 +33,16 @@ const props = withDefaults(
     v-else
     class="flex h-screen w-full flex-col overflow-hidden bg-white text-gray-900 dark:bg-dark dark:text-white"
   >
-    <slot name="header" />
+    <header class="shrink-0">
+      <slot name="header" />
+    </header>
 
     <main class="flex-1 overflow-y-auto bg-white text-gray-900 dark:bg-dark dark:text-white">
       <slot />
     </main>
 
-    <slot name="footer" />
+    <footer class="shrink-0">
+      <slot name="footer" />
+    </footer>
   </div>
 </template>
