@@ -2,6 +2,11 @@
   "name": "@aqunex/ui",
   "version": "0.1.0",
   "license": "MIT",
+  
+  "publishConfig": {
+    "access": "public"
+  },
+
   "type": "module",
   "packageManager": "pnpm@11.7.0",
   "devEngines": {
